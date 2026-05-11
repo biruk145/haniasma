@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hani Asma – QA Automation Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal:    #0ABFBC;
+    --coral:   #FC4F4F;
+    --gold:    #F6AE2D;
+    --cream:   #FFF8EE;
+    --navy:    #0D1F3C;
+    --mid:     #1A3358;
+    --muted:   #8BA3C1;
+    --white:   #FFFFFF;
+    --card-bg: rgba(255,255,255,0.06);
+    --border:  rgba(255,255,255,0.10);
+    --radius:  16px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── ANIMATED MESH BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 20%, rgba(10,191,188,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 80%, rgba(246,174,45,0.14) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 70% 10%, rgba(252,79,79,0.10) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 5%;
+    background: rgba(13,31,60,0.72);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: var(--teal);
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 5% 80px;
+    overflow: hidden;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(10,191,188,0.12);
+    border: 1px solid rgba(10,191,188,0.3);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.82rem;
+    color: var(--teal);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: -3px;
+    color: var(--white);
+  }
+  .hero-name .accent { color: var(--teal); }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: var(--gold);
+    margin-top: 1.2rem;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-desc {
+    max-width: 640px;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-top: 1.4rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.8rem;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: var(--navy);
+  }
+  .btn-primary:hover { background: #08ddd9; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(10,191,188,0.35); }
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+
+  .hero-contacts {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2.8rem;
+    flex-wrap: wrap;
+  }
+  .contact-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-chip:hover { color: var(--teal); }
+  .contact-chip .icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+
+  /* big decorative circle */
+  .hero-circle {
+    position: absolute;
+    right: -120px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(10,191,188,0.15);
+    animation: spin 30s linear infinite;
+  }
+  .hero-circle::before {
+    content: '';
+    position: absolute;
+    inset: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(246,174,45,0.12);
+  }
+  .hero-circle::after {
+    content: '';
+    position: absolute;
+    inset: 80px;
+    border-radius: 50%;
+    border: 1px dashed rgba(252,79,79,0.12);
+  }
+  @keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+
+  /* stats bar */
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 0.3rem; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--teal);
+    line-height: 1;
+  }
+  .stat-label { color: var(--muted); font-size: 0.82rem; letter-spacing: 0.5px; }
+
+  /* ── CONTAINER ── */
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 5%; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    margin-bottom: 3rem;
+  }
+  .section-tag {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: var(--white);
+  }
+  .section-title span { color: var(--teal); }
+
+  /* ── ABOUT ── */
+  #about { padding: 120px 0; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .about-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .highlight-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .highlight-card:hover {
+    border-color: rgba(10,191,188,0.4);
+    transform: translateX(6px);
+  }
+  .highlight-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .highlight-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+  .highlight-card p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── SKILLS ── */
+  #skills { padding: 100px 0; background: rgba(0,0,0,0.15); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-category {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-category::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+  }
+  .skill-category.cat-auto::before { background: var(--teal); }
+  .skill-category.cat-lang::before { background: var(--gold); }
+  .skill-category.cat-ci::before   { background: var(--coral); }
+  .skill-category:hover { border-color: rgba(10,191,188,0.3); transform: translateY(-4px); }
+  .skill-category h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--white);
+    margin-bottom: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .skill-tag {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 8px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.82rem;
+    color: var(--cream);
+    font-weight: 400;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover {
+    background: rgba(10,191,188,0.15);
+    border-color: rgba(10,191,188,0.4);
+    color: var(--teal);
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { padding: 120px 0; }
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--teal), var(--gold), var(--coral), transparent);
+    opacity: 0.4;
+  }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 1.5rem;
+    padding-bottom: 3rem;
+    position: relative;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .tl-dot {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--mid);
+    border: 2.5px solid var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+    position: relative;
+    z-index: 2;
+    margin-top: 4px;
+    transition: box-shadow 0.25s;
+  }
+  .timeline-item:hover .tl-dot {
+    box-shadow: 0 0 0 8px rgba(10,191,188,0.12);
+  }
+  .tl-content {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.8rem 2rem;
+    transition: border-color 0.25s;
+  }
+  .tl-content:hover { border-color: rgba(10,191,188,0.3); }
+  .tl-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+  .tl-role {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--white);
+  }
+  .tl-date {
+    background: rgba(10,191,188,0.12);
+    color: var(--teal);
+    border: 1px solid rgba(10,191,188,0.25);
+    border-radius: 100px;
+    padding: 0.25rem 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tl-company {
+    color: var(--gold);
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .tl-company::before { content: '📍'; font-size: 0.8rem; }
+  .tl-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .tl-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .tl-list li::before {
+    content: '▸';
+    color: var(--teal);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tl-env {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .tl-env-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+  .env-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .env-tag {
+    background: rgba(246,174,45,0.08);
+    border: 1px solid rgba(246,174,45,0.18);
+    color: var(--gold);
+    border-radius: 6px;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  /* ── EDUCATION ── */
+  #education { padding: 100px 0; background: rgba(0,0,0,0.15); }
+  .edu-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    max-width: 700px;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .edu-card:hover { border-color: rgba(10,191,188,0.4); transform: translateY(-4px); }
+  .edu-icon {
+    width: 72px; height: 72px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(10,191,188,0.2), rgba(246,174,45,0.15));
+    border: 1px solid rgba(10,191,188,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+  .edu-info h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .edu-info p {
+    color: var(--gold);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  /* ── OBJECTIVE ── */
+  #objective { padding: 100px 0; }
+  .objective-card {
+    background: linear-gradient(135deg, rgba(10,191,188,0.08), rgba(246,174,45,0.06));
+    border: 1px solid rgba(10,191,188,0.2);
+    border-radius: 24px;
+    padding: 3.5rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .objective-quote {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.6;
+    letter-spacing: -0.3px;
+  }
+  .objective-quote span { color: var(--teal); }
+
+  /* ── CONTACT ── */
+  #contact { padding: 100px 0 140px; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    max-width: 900px;
+  }
+  .contact-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--cream);
+    transition: all 0.25s;
+  }
+  .contact-card:hover {
+    border-color: rgba(10,191,188,0.4);
+    background: rgba(10,191,188,0.08);
+    transform: translateY(-3px);
+  }
+  .contact-card .c-icon {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    background: rgba(10,191,188,0.12);
+    border: 1px solid rgba(10,191,188,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .contact-card .c-info span {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 0.25rem;
+  }
+  .contact-card .c-info strong { font-weight: 500; font-size: 0.92rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 5%;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.83rem;
+    position: relative; z-index: 1;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-circle { display: none; }
+    nav .nav-links { display: none; }
+    .tl-content { padding: 1.4rem; }
+    .objective-card { padding: 2rem; }
+    .edu-card { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Hani<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:hani21asma@gmail.com" class="btn btn-primary" style="padding:0.6rem 1.3rem;font-size:0.85rem;">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-circle"></div>
+  <div class="container">
+    <div class="hero-eyebrow">Available for new opportunities</div>
+    <h1 class="hero-name">Hani<br><span class="accent">Asma</span></h1>
+    <p class="hero-title">QA Automation Engineer · Cypress · Selenium · API Testing</p>
+    <p class="hero-desc">
+      6+ years crafting robust automation frameworks across Banking, Healthcare, and Ecommerce — turning complex testing challenges into reliable, scalable solutions.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-contacts">
+      <a href="mailto:hani21asma@gmail.com" class="contact-chip">
+        <span class="icon">📧</span> hani21asma@gmail.com
+      </a>
+      <a href="tel:+15715074949" class="contact-chip">
+        <span class="icon">📱</span> +1 (571) 507-4949
+      </a>
+      <span class="contact-chip">
+        <span class="icon">📍</span> Atlanta, Georgia
+      </span>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">6+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5</span>
+        <span class="stat-label">Companies</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Industries</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">15+</span>
+        <span class="stat-label">Tech Stack</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <div class="section-header">
+          <p class="section-tag">About Me</p>
+          <h2 class="section-title">Passionate about<br><span>Quality</span> at Scale</h2>
+        </div>
+        <p>I am a QA Automation Engineer with over 6 years of experience in software testing, automation, and quality assurance across Banking, Financial Services, Healthcare, and Ecommerce industries.</p>
+        <p>I specialize in building automation frameworks from scratch using Cypress and Selenium WebDriver with Java, JavaScript, and TypeScript — integrating seamlessly into CI/CD pipelines.</p>
+        <p>Passionate about delivering reliable applications, optimizing testing processes, and collaborating with development teams in Agile environments to ensure high-quality software delivery.</p>
+      </div>
+      <div class="about-highlights fade-up">
+        <div class="highlight-card">
+          <span class="highlight-icon">🏦</span>
+          <div>
+            <h4>Banking & Finance</h4>
+            <p>Deep experience at TIAA, BankUnited, and Pinnacle Financial ensuring compliance-grade quality assurance.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-icon">🏥</span>
+          <div>
+            <h4>Healthcare</h4>
+            <p>VA systems automation with rigorous end-to-end coverage for critical healthcare applications.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-icon">🔄</span>
+          <div>
+            <h4>CI/CD Integration</h4>
+            <p>Seamless Jenkins pipeline integration for continuous testing and rapid, reliable feedback cycles.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-icon">🤝</span>
+          <div>
+            <h4>Agile Collaboration</h4>
+            <p>Strong communicator in cross-functional Agile teams, bridging QA and development workflows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-tag">Technical Skills</p>
+      <h2 class="section-title">Tools &amp; <span>Technologies</span></h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-category cat-auto fade-up">
+        <h3>⚙️ Automation Testing</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Selenium WebDriver</span>
+          <span class="skill-tag">Cypress</span>
+          <span class="skill-tag">Selenium Grid</span>
+          <span class="skill-tag">Selenium IDE</span>
+          <span class="skill-tag">Appium</span>
+          <span class="skill-tag">TestNG</span>
+          <span class="skill-tag">Cucumber</span>
+          <span class="skill-tag">JUnit</span>
+          <span class="skill-tag">PactumJS</span>
+          <span class="skill-tag">Postman</span>
+          <span class="skill-tag">SOAPUI</span>
+          <span class="skill-tag">JMeter</span>
+        </div>
+      </div>
+      <div class="skill-category cat-lang fade-up">
+        <h3>💻 Programming Languages</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Shell Script</span>
+        </div>
+      </div>
+      <div class="skill-category cat-ci fade-up">
+        <h3>🚀 CI/CD &amp; Dev Tools</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Jenkins</span>
+          <span class="skill-tag">Maven</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">JIRA</span>
+          <span class="skill-tag">Oracle DB</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Linux / UNIX</span>
+          <span class="skill-tag">Quality Center</span>
+          <span class="skill-tag">QTP / UFT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-tag">Career Timeline</p>
+      <h2 class="section-title">Professional <span>Experience</span></h2>
+    </div>
+    <div class="timeline">
+
+      <!-- TIAA -->
+      <div class="timeline-item fade-up">
+        <div class="tl-dot">💼</div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <p class="tl-role">Software Test Engineer / Cypress</p>
+            <span class="tl-date">09/2024 – Present</span>
+          </div>
+          <p class="tl-company">TIAA – New York City</p>
+          <ul class="tl-list">
+            <li>Integrated automation scripts with Jenkins pipelines for continuous testing and rapid feedback.</li>
+            <li>Executed parallel Cucumber scenarios to optimize test execution time significantly.</li>
+            <li>Conducted backend validation and comprehensive defect documentation.</li>
+            <li>Performed cross-browser testing and REST API testing using Postman and SOAPUI.</li>
+            <li>Managed end-to-end automated regression testing suites.</li>
+            <li>Worked in Agile environments using JIRA, Jenkins, and Maven.</li>
+          </ul>
+          <div class="tl-env">
+            <p class="tl-env-label">Environment</p>
+            <div class="env-tags">
+              <span class="env-tag">Cypress</span><span class="env-tag">Selenium Grid</span><span class="env-tag">JavaScript</span><span class="env-tag">TypeScript</span><span class="env-tag">TestNG</span><span class="env-tag">Jenkins</span><span class="env-tag">Maven</span><span class="env-tag">SOAPUI</span><span class="env-tag">JMeter</span><span class="env-tag">Linux</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VA -->
+      <div class="timeline-item fade-up">
+        <div class="tl-dot">🏥</div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <p class="tl-role">QA Automation / Cypress Tester</p>
+            <span class="tl-date">01/2023 – 07/2024</span>
+          </div>
+          <p class="tl-company">Veteran Affairs (VA)</p>
+          <ul class="tl-list">
+            <li>Developed scalable Selenium WebDriver and Cypress automation frameworks from scratch.</li>
+            <li>Designed complex end-to-end automation scenarios using Cucumber and Gherkin syntax.</li>
+            <li>Built reusable page objects and custom Cypress commands for maintainability.</li>
+            <li>Implemented advanced TestNG features for parallel execution and reporting.</li>
+            <li>Integrated automation suites into Jenkins CI/CD pipelines.</li>
+            <li>Automated API testing using PactumJS and provided team training on BDD practices.</li>
+          </ul>
+          <div class="tl-env">
+            <p class="tl-env-label">Environment</p>
+            <div class="env-tags">
+              <span class="env-tag">Cypress</span><span class="env-tag">Selenium WebDriver</span><span class="env-tag">Java</span><span class="env-tag">TypeScript</span><span class="env-tag">TestNG</span><span class="env-tag">Cucumber</span><span class="env-tag">Jenkins</span><span class="env-tag">PactumJS</span><span class="env-tag">Postman</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pinnacle -->
+      <div class="timeline-item fade-up">
+        <div class="tl-dot">🏦</div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <p class="tl-role">QA Automation / Selenium Tester</p>
+            <span class="tl-date">08/2021 – 12/2022</span>
+          </div>
+          <p class="tl-company">Pinnacle Financial – Nashville, TN</p>
+          <ul class="tl-list">
+            <li>Validated functional and non-functional requirements comprehensively.</li>
+            <li>Developed automation scripts using Java and TestNG with strong coverage.</li>
+            <li>Conducted database testing and backend validation across Oracle/SQL systems.</li>
+            <li>Implemented mobile automation testing using Appium for mobile applications.</li>
+            <li>Executed cross-browser testing and regression testing cycles.</li>
+            <li>Collaborated with developers for thorough defect analysis and resolution.</li>
+          </ul>
+          <div class="tl-env">
+            <p class="tl-env-label">Environment</p>
+            <div class="env-tags">
+              <span class="env-tag">Java</span><span class="env-tag">Selenium WebDriver</span><span class="env-tag">Cypress</span><span class="env-tag">Appium</span><span class="env-tag">TestNG</span><span class="env-tag">SOAPUI</span><span class="env-tag">JMeter</span><span class="env-tag">Linux</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BankUnited -->
+      <div class="timeline-item fade-up">
+        <div class="tl-dot">🏛️</div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <p class="tl-role">Software Test Engineer</p>
+            <span class="tl-date">12/2018 – 07/2021</span>
+          </div>
+          <p class="tl-company">BankUnited – Miami, FL</p>
+          <ul class="tl-list">
+            <li>Participated in complete SDLC and STLC activities from requirements to production.</li>
+            <li>Developed and executed functional, regression, integration, and UAT testing.</li>
+            <li>Created test cases from user stories and technical specifications.</li>
+            <li>Conducted GUI and Black Box testing using QTP/UFT tools.</li>
+            <li>Performed SOA/API testing using SOAPUI with thorough documentation.</li>
+            <li>Managed defect tracking and reporting using Quality Center.</li>
+          </ul>
+          <div class="tl-env">
+            <p class="tl-env-label">Environment</p>
+            <div class="env-tags">
+              <span class="env-tag">Java</span><span class="env-tag">Oracle DB</span><span class="env-tag">UNIX</span><span class="env-tag">Selenium IDE</span><span class="env-tag">JMeter</span><span class="env-tag">QTP / UFT</span><span class="env-tag">SOAPUI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rite Aid -->
+      <div class="timeline-item fade-up">
+        <div class="tl-dot">💊</div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <p class="tl-role">QA Engineer</p>
+            <span class="tl-date">07/2016 – 11/2018</span>
+          </div>
+          <p class="tl-company">Rite Aid – Camp Hill, PA</p>
+          <ul class="tl-list">
+            <li>Developed comprehensive manual and automated test cases for ecommerce workflows.</li>
+            <li>Created automated regression scripts using Quick Test Professional.</li>
+            <li>Executed regression and integration testing with detailed reporting.</li>
+            <li>Reported and tracked defects using Quality Center throughout the SDLC.</li>
+            <li>Worked effectively in both Agile and Waterfall delivery environments.</li>
+          </ul>
+          <div class="tl-env">
+            <p class="tl-env-label">Environment</p>
+            <div class="env-tags">
+              <span class="env-tag">Manual Testing</span><span class="env-tag">QTP</span><span class="env-tag">Quality Center</span><span class="env-tag">Java</span><span class="env-tag">JavaScript</span><span class="env-tag">SQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-tag">Education</p>
+      <h2 class="section-title">Academic <span>Background</span></h2>
+    </div>
+    <div class="edu-card fade-up">
+      <div class="edu-icon">🎓</div>
+      <div class="edu-info">
+        <h3>Bachelor's Degree in Computer Science</h3>
+        <p>Bahir Dar University</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIVE -->
+<section id="objective">
+  <div class="container">
+    <div class="objective-card fade-up">
+      <p style="font-size:0.78rem;text-transform:uppercase;letter-spacing:2px;color:var(--teal);margin-bottom:1.5rem;font-weight:600;">Career Objective</p>
+      <p class="objective-quote">
+        "To obtain a challenging QA Automation Engineer position where I can utilize my expertise in <span>Cypress, Selenium, API testing,</span> and <span>CI/CD automation</span> to contribute to high-quality software delivery while continuously improving my technical and professional skills."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-tag">Get In Touch</p>
+      <h2 class="section-title">Let's <span>Connect</span></h2>
+    </div>
+    <div class="contact-grid fade-up">
+      <a href="mailto:hani21asma@gmail.com" class="contact-card">
+        <div class="c-icon">📧</div>
+        <div class="c-info"><span>Email</span><strong>hani21asma@gmail.com</strong></div>
+      </a>
+      <a href="tel:+15715074949" class="contact-card">
+        <div class="c-icon">📱</div>
+        <div class="c-info"><span>Phone</span><strong>+1 (571) 507-4949</strong></div>
+      </a>
+      <div class="contact-card" style="cursor:default;">
+        <div class="c-icon">📍</div>
+        <div class="c-info"><span>Location</span><strong>Atlanta, Georgia, USA</strong></div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;" class="fade-up">
+      <a href="mailto:hani21asma@gmail.com" class="btn btn-primary" style="font-size:1rem;padding:1rem 2.2rem;">
+        📬 Send Me a Message
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Hani Asma · QA Automation Engineer · Built with care 💙</p>
+</footer>
+
+<script>
+  // Scroll-triggered fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Smooth active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--teal)' : '';
+    });
+  });
+</script>
+</body>
+</html>
